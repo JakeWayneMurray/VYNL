@@ -1,0 +1,140 @@
+﻿<Window xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"  x:Class="VinylCollectionApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:VinylCollectionApplication"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        KeyDown="MainWindow_OnKeyDown"
+        Icon="Icon1.ico"
+        Title="Vinyl Collection" Height="570" Width="1250">
+    <Border Background="#f1f3f4">
+
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            <materialDesign:Card Width="900" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical">
+                            <materialDesign:Card Margin="10,10,10,0" Height="40" VerticalAlignment="Center">
+                                <TextBox
+                                    x:Name="SearchVinyl"
+                                    materialDesign:HintAssist.Hint="Search"
+                                    Height="35"
+                                    Margin="10,0,10,0"
+                                    VerticalAlignment="Center"
+                                    TextChanged="SearchVinyl_OnTextChanged"/>
+                            </materialDesign:Card>
+                            <materialDesign:Card Margin="10">
+                                <ListView x:Name="VinylListView" Width="400" Height="395" SelectionChanged="VinylListView_OnSelectionChanged" MouseDoubleClick="VinylListView_MouseDoubleClick">
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Delete" x:Name="DeleteMenuItem" Click="DeleteMenuItem_OnClick"/>
+                                        </ContextMenu>
+                                    </ListView.ContextMenu>
+
+
+                                </ListView>
+                            </materialDesign:Card>
+                        </StackPanel>
+                            <StackPanel Orientation="Vertical" Width="450">
+                            <materialDesign:Card Width="430" Height="300" Margin="10">
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                        <materialDesign:Card Margin="5" Width="180" Height="180">
+                                            <Image x:Name="SelectedVinylImage" Width="170" Height="170" MouseLeftButtonDown="SelectedVinylImage_MouseLeftButtonDown"/>
+                                        </materialDesign:Card>
+                                        <TextBlock x:Name="SelectedVinylArtist" Margin="5,70,0,0" FontSize="10" FontWeight="Light"/>
+                                        <TextBlock x:Name="SelectedVinylAlbum" Margin="5,10,0,5" FontSize="10" FontWeight="Light"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Vertical">
+                                        <ListView MouseDoubleClick="TrackListView_OnMouseDoubleClick" x:Name="TrackListView" Width="230" Margin="5"  Height="290"  FontSize="10" >
+                                            <ListView.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Preview" x:Name="PreviewRightClick" Click="PreviewRightClick_OnClick"/>
+                                                </ContextMenu>
+                                            </ListView.ContextMenu>
+                                        </ListView>
+
+                                    </StackPanel>
+                                </StackPanel>
+
+                            </materialDesign:Card>
+                            <Button x:Name="NewVinylButton" Click="NewVinylButton_OnClick" Margin="10,0,10,0">
+                                <Button.Background>
+                                    <LinearGradientBrush  StartPoint="0,0" EndPoint="1,1">
+                                        <GradientStop Color="#ED1717" Offset="0"/>
+                                        <GradientStop Color="#E7ED17" Offset="0.445"/>
+                                        <GradientStop Color="#FFAFD1F8" Offset="0.67"/>
+                                        <GradientStop Color="#8817ED" Offset="1.00"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                                <TextBlock Text="Add Vinyl To Collection" ></TextBlock>
+                            </Button>
+
+                            <materialDesign:Card Height="95" Margin="10">
+                                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                                        <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                                            <TextBlock  Text="Sort by Artist:           "></TextBlock>
+                                            <ToggleButton x:Name="SortByArtistToggleButton" Click="SortByArtistToggleButton_Click"></ToggleButton>
+
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center"  HorizontalAlignment="Center">
+                                            <TextBlock Text="Sort by Album:         "></TextBlock>
+                                            <ToggleButton x:Name="SortByAlbumToggleButton" Click="SortByAlbumToggleButton_Click"></ToggleButton>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </materialDesign:Card>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+            <!--FRIENDS PANEL-->
+        </StackPanel>
+            <materialDesign:Card Width="250" Height="500" Margin="10">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                                    x:Name="SettingsButton"
+                                    ToolTip="Profile Settings"
+                                    Click="SettingsButton_Click"
+                                    HorizontalAlignment="Right"
+                                     Margin="10,0,30,0">
+                            <materialDesign:PackIcon Kind="Settings" />
+                        </Button>
+                        <TextBlock Text="Friends" FontFamily="Roboto" FontSize="15" HorizontalAlignment="Center" Width="60" Margin="10,10,40,10"></TextBlock>
+                        <Button
+                                    x:Name="ShareProfileButton"
+                                    ToolTip="Share Profile"
+                                    Click="ShareProfileButton_Click"
+                                    HorizontalAlignment="Right">
+                            <materialDesign:PackIcon Kind="Share" />
+                        </Button>
+
+                    </StackPanel>
+                    <ListView x:Name="FriendsListView" Margin="10" Height="400" MouseDoubleClick="FriendsListView_MouseDoubleClick" SelectionChanged="FriendsListView_SelectionChanged" >
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Remove Friend" x:Name="RemoveFriendClick" Click="RemoveFriendClick_Click" />
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="FindFriendButton" Click="FindFriendButton_Click" Width="200" Background="AliceBlue" VerticalAlignment="Center">
+                            <mah:MetroHeader Content="Find Friend" VerticalAlignment="Center" />
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </materialDesign:Card>
+
+
+
+        </StackPanel>
+    </Border>
+
+</Window>

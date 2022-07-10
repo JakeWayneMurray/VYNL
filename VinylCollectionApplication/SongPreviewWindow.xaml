@@ -1,0 +1,78 @@
+﻿<Window x:Class="VinylCollectionApplication.SongPreviewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VinylCollectionApplication"
+        WindowStartupLocation="CenterScreen"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="LightGray"
+        Title="Song Preview" Height="400" Width="700">
+    <Grid>
+        <materialDesign:Card Margin="10">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <materialDesign:Card Width="350" Height="350" Margin="10" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                            <TextBlock Text="NOW PLAYING"  FontSize="10" FontWeight="Light" HorizontalAlignment="Center" Margin="10"/>
+
+                            <materialDesign:Card Margin="5" Width="180" Height="180">
+                                <Image x:Name="RandomVinylImage" Width="170" Height="170"/>
+                            </materialDesign:Card>
+
+                            <TextBlock x:Name="PreviewViynlSong" Text="TEMP SONG"  FontSize="10" FontWeight="Light" HorizontalAlignment="Center" />
+                            <TextBlock x:Name="PreviewVinylArtist" Text="TEMP ARTIST"  FontSize="10" FontWeight="Light" HorizontalAlignment="Center"/>
+                            <TextBlock x:Name="PreviewVinylAlbum" Text="TEMP ALBUM" Margin="0,0,0,15" FontSize="10" FontWeight="Light" HorizontalAlignment="Center"/>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="PlayMusic" Click="PlayMusic_OnClick" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                                    <materialDesign:PackIcon Kind="Play" />
+                                </Button>
+                                <Button x:Name="PauseMusic" Click="PauseMusic_Click" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                                    <materialDesign:PackIcon Kind="Pause" />
+                                </Button>
+                                <Button x:Name="PreviousMusic" Click="PreviousMusic_Click" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                                    <materialDesign:PackIcon Kind="PreviousTitle" />
+                                </Button>
+                                <Button x:Name="NextMusic" Click="NextMusic_Click" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                                    <materialDesign:PackIcon Kind="NextTitle" />
+                                </Button>
+                                <Button x:Name="StopMusic" Click="StopMusic_OnClick" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                                    <materialDesign:PackIcon Kind="Stop" />
+                                </Button>
+
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </materialDesign:Card>
+            </StackPanel>
+
+            <materialDesign:Card Width="220" Margin="10" VerticalAlignment="Top">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                    <TextBlock x:Name="PreviewTrackListVinylAlbum" Text="TEMP ALBUM" VerticalAlignment="Top" FontSize="10" Margin="0,15,0,0" FontWeight="Light" HorizontalAlignment="Center" />
+                    <ListView x:Name="PreviewTrackListView" Width="200"  Height="300" Margin="10" FontSize="10" MouseDoubleClick="PreviewTrackListView_MouseDoubleClick" >
+                                <ListView.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Preview" x:Name="PreviewRightClick" />
+                                    </ContextMenu>
+                                </ListView.ContextMenu>
+                            </ListView>
+                </StackPanel>
+            </materialDesign:Card>
+            <StackPanel Orientation="Vertical">
+                    <Button x:Name="Close" Click="Close_OnClick" Background="DarkGray" VerticalAlignment="Top" Margin="10" >
+                        <materialDesign:PackIcon Kind="Close" />
+                    </Button>
+                    <Slider Orientation="Vertical" x:Name="VolumeSlider" Height="200" HorizontalAlignment="Center" ValueChanged="Slider_ValueChanged"/>
+            </StackPanel>
+        </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>
