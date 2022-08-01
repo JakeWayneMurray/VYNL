@@ -49,6 +49,12 @@ namespace VinylCollectionApplication
             LoginWindow login = new LoginWindow();
             login.ShowDialog();
             privateCounter = 0;
+
+            if (currentUser == null)
+            {
+                Close();
+                return;
+            }
             RefreshFriends();
             PopulateVinylList();
             PopulateFriendsList();
@@ -59,10 +65,6 @@ namespace VinylCollectionApplication
                 selectedFriend = currentUser.friends[0];
             }
 
-            if (currentUser == null)
-            {
-                Close();
-            }
         }
 
         public Friend getSelectedFriend()
@@ -81,6 +83,7 @@ namespace VinylCollectionApplication
 
         public void PopulateVinylList()
         {
+            if (currentUser == null) return;
             VinylListView.Items.Clear();
             foreach (var vinyl in currentUser.Collection)
             {
@@ -88,10 +91,13 @@ namespace VinylCollectionApplication
                 newItem.Tag = vinyl;
                 VinylListView.Items.Add(vinyl.Album);
             }
+
         }
 
         public void PopulateFriendsList()
         {
+            if (currentUser == null) return;
+
             FriendsListView.Items.Clear();
             foreach (Friend friend in currentUser.friends)
             {
@@ -368,18 +374,26 @@ namespace VinylCollectionApplication
         public void RefreshFriends()
         {
             List<Friend> refreshedFriends = new List<Friend>();
-            foreach (Friend friend in currentUser.friends) {
-                foreach (Account a in VerifiedAccounts.accounts)
+            try
+            {
+                foreach (Friend friend in currentUser.friends)
                 {
-                    if (a.email == friend.email)
+                    foreach (Account a in VerifiedAccounts.accounts)
                     {
-                        Friend newFriend = new Friend(a.firstName, a.lastName, a.email, a.Collection);
-                        refreshedFriends.Add(newFriend);
-                        break;
+                        if (a.email == friend.email)
+                        {
+                            Friend newFriend = new Friend(a.firstName, a.lastName, a.email, a.Collection);
+                            refreshedFriends.Add(newFriend);
+                            break;
+                        }
                     }
                 }
+                currentUser.friends = refreshedFriends;
             }
-            currentUser.friends = refreshedFriends;
+            catch(NullReferenceException e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
 
