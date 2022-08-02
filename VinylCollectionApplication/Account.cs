@@ -51,7 +51,7 @@ namespace VinylCollectionApplication
         private static IMongoCollection<BsonDocument> getCollection()
         {
            
-            ```MongoClient dbClient = new MongoClient("mongodb+srv://DadsThrobber:BrianSucks@vynl.4q0um.mongodb.net/VynLDatabase?retryWrites=true&w=majority");
+            ```MongoClient dbClient = new MongoClient("mongodb+srv://DadsThrobber:BrianSucks@vynl.4q0um.mongodb.net/VynLDatabase?retryWrites=true&w=majority");```
             
             
             var database = dbClient.GetDatabase("VynLDatabase");
